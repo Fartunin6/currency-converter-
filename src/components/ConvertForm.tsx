@@ -2,28 +2,31 @@ import React from 'react';
 import { reduxForm, Field, InjectedFormProps } from 'redux-form';
 import { ConvertData } from '../pages/MainPage';
 
-const ConvertForm: React.FC<InjectedFormProps<ConvertData>> = ({ handleSubmit }) => {
+type Props = {
+  symbols: object;
+};
+
+const ConvertForm: React.FC<Props & InjectedFormProps<ConvertData, Props>> = ({
+  handleSubmit,
+  symbols,
+}) => {
+  const mapAvaibleSymbols = Object.keys(symbols).map((symbol, idx) => (
+    <option value={symbol} key={`${symbol}_${idx}`} className="convert__form-option">
+      {symbol}
+    </option>
+  ));
+
   return (
     <form onSubmit={handleSubmit} className="convert__form">
       <div className="convert__form-container">
         <Field type="number" name="amount" component="input" className="convert__form-input" />
         <Field name="from" component="select" className="convert__form-select">
-          <option value="USD" className="convert__form-option">
-            usd
-          </option>
-          <option value="EUR" className="convert__form-option">
-            eur
-          </option>
+          {mapAvaibleSymbols}
         </Field>
       </div>
 
       <Field name="to" component="select" className="convert__form-select">
-        <option value="EUR" className="convert__form-option">
-          eur
-        </option>
-        <option value="USD" className="convert__form-option">
-          usd
-        </option>
+        {mapAvaibleSymbols}
       </Field>
 
       <button type="submit" className="convert__form-button">
@@ -33,4 +36,4 @@ const ConvertForm: React.FC<InjectedFormProps<ConvertData>> = ({ handleSubmit })
   );
 };
 
-export default reduxForm<ConvertData>({ form: 'convert-form' })(ConvertForm);
+export default reduxForm<ConvertData, Props>({ form: 'convert-form' })(ConvertForm);

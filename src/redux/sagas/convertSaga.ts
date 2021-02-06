@@ -1,22 +1,39 @@
 import { put, call, takeEvery, all, fork } from 'redux-saga/effects';
+import axios from 'axios';
 import ENDPOINTS from '../../constants/endpoints';
 
-import { CONVERT_NAMES } from '../types/convertTypes';
+import { CONVERT_NAMES, FetchRate } from '../types/convertTypes';
+import { ConvertData } from '../../pages/MainPage';
+
 import { setSymbols } from '../actions/convertActions';
 
+// these requests have to be in services folder
 const fetchSymbolsRequest = async (): Promise<object> => {
-  return await fetch(ENDPOINTS.GET_SUPPORTED_SYMBOLS);
+  return await axios.get(ENDPOINTS.GET_SUPPORTED_SYMBOLS);
+};
+
+const fetchRateRequest = async (convertData: ConvertData): Promise<object> => {
+  return await axios.get(ENDPOINTS.GET_RATE(convertData));
 };
 
 function* symbolsWorker() {
   const { data } = yield call(fetchSymbolsRequest);
-  yield put(setSymbols(data));
+  yield put(setSymbols(data.symbols));
 }
 
 function* symbolsWatcher() {
   yield takeEvery(CONVERT_NAMES.FETCH_SYMBOLS, symbolsWorker);
 }
 
+function* rateWorker({ payload }: FetchRate) {
+  const { data } = yield call(fetchRateRequest, payload);
+  console.log(data);
+}
+
+function* rateWatcher() {
+  yield takeEvery(CONVERT_NAMES.FETCH_RATE, rateWorker);
+}
+
 export default function* convertSaga() {
-  yield all([fork(symbolsWatcher)]);
+  yield all([fork(symbolsWatcher), fork(rateWatcher)]);
 }
