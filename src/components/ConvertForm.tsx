@@ -19,17 +19,26 @@ const ConvertForm: React.FC<Props & InjectedFormProps<ConvertData, Props>> = ({
   return (
     <form onSubmit={handleSubmit} className="convert__form">
       <div className="convert__form-container">
-        <Field type="number" name="amount" component="input" className="convert__form-input" />
-        <Field name="from" component="select" className="convert__form-select">
-          {mapAvaibleSymbols}
-        </Field>
+        <label className="convert__form-label">
+          <span className="convert__form-name">amount</span>
+          <Field type="number" name="amount" component="input" className="convert__form-input" />
+        </label>
+        <label className="convert__form-label">
+          <span className="convert__form-name">from</span>
+          <Field name="from" component="select" className="convert__form-select">
+            {mapAvaibleSymbols}
+          </Field>
+        </label>
       </div>
 
-      <Field name="to" component="select" className="convert__form-select">
-        {mapAvaibleSymbols}
-      </Field>
+      <label className="convert__form-label">
+        <span className="convert__form-name">to</span>
+        <Field name="to" component="select" className="convert__form-select">
+          {mapAvaibleSymbols}
+        </Field>
+      </label>
 
-      <button type="submit" className="convert__form-button">
+      <button type="submit" className="convert__form-button btn-grad">
         convert
       </button>
     </form>

@@ -5,7 +5,7 @@ import ENDPOINTS from '../../constants/endpoints';
 import { CONVERT_NAMES, FetchRate } from '../types/convertTypes';
 import { ConvertData } from '../../pages/MainPage';
 
-import { setSymbols } from '../actions/convertActions';
+import { setRate, setSymbols } from '../actions/convertActions';
 
 // these requests have to be in services folder
 const fetchSymbolsRequest = async (): Promise<object> => {
@@ -25,9 +25,11 @@ function* symbolsWatcher() {
   yield takeEvery(CONVERT_NAMES.FETCH_SYMBOLS, symbolsWorker);
 }
 
-function* rateWorker({ payload }: FetchRate) {
+function* rateWorker({ payload, payload: { from, to, amount } }: FetchRate) {
   const { data } = yield call(fetchRateRequest, payload);
-  console.log(data);
+
+  const dataRate = `${Math.floor(amount * data[`${from}_${to}`])} ${to}`;
+  yield put(setRate(dataRate));
 }
 
 function* rateWatcher() {

@@ -14,7 +14,7 @@ export type ConvertData = {
 const MainPage: React.FC = () => {
   const dispatch = useDispatch();
 
-  const { symbols } = useTypedSelector(({ convert }) => convert);
+  const { symbols, rate } = useTypedSelector(({ convert }) => convert);
 
   useEffect(() => {
     dispatch(fetchSymbols());
@@ -27,6 +27,7 @@ const MainPage: React.FC = () => {
   return (
     <section className="convert">
       <ConvertForm onSubmit={onSubmit} symbols={symbols} />
+      {rate && <span className="convert__rate">{rate}</span>}
     </section>
   );
 };

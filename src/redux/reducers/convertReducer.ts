@@ -1,4 +1,4 @@
-import { CONVERT_NAMES, ConvertActions } from '../types/convertTypes';
+import { CONVERT_NAMES } from '../types/convertTypes';
 
 const initialState = {
   symbols: {} as object,
