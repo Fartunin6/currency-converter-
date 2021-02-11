@@ -28,7 +28,7 @@ function* symbolsWatcher() {
 function* rateWorker({ payload, payload: { from, to, amount } }: FetchRate) {
   const { data } = yield call(fetchRateRequest, payload);
 
-  const dataRate = `${Math.floor(amount * data[`${from}_${to}`])} ${to}`;
+  const dataRate = `${(amount * data[`${from}_${to}`]).toFixed(2)} ${to}`;
   yield put(setRate(dataRate));
 }
 

@@ -6,15 +6,22 @@ export const CONVERT_NAMES = {
 
   SET_RATE: 'SET_RATE',
   FETCH_RATE: 'FETCH_RATE',
+
+  SET_DEFAULT_CURRENCY: 'SET_DEFAULT_CURRENCY',
 };
 
-export type SetSymbols = {
+type SetSymbols = {
   type: typeof CONVERT_NAMES.SET_SYMBOLS;
   payload: object;
 };
 
-export type SetRate = {
+type SetRate = {
   type: typeof CONVERT_NAMES.SET_RATE;
+  payload: string;
+};
+
+type SetDefaultCurrency = {
+  type: typeof CONVERT_NAMES.SET_DEFAULT_CURRENCY;
   payload: string;
 };
 
@@ -27,4 +34,4 @@ export type FetchRate = {
   payload: ConvertData;
 };
 
-export type ConvertActions = SetSymbols | FetchSymbols | SetRate | FetchRate;
+export type ConvertActions = SetSymbols | FetchSymbols | SetRate | FetchRate | SetDefaultCurrency;

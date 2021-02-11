@@ -3,6 +3,7 @@ import { CONVERT_NAMES } from '../types/convertTypes';
 const initialState = {
   symbols: {} as object,
   rate: null as string | null,
+  defaultCurrency: '' as string,
 };
 
 type ConvertState = typeof initialState;
@@ -18,6 +19,11 @@ const convertReducer = (state = initialState, action: any): ConvertState => {
       return {
         ...state,
         rate: action.payload,
+      };
+    case CONVERT_NAMES.SET_DEFAULT_CURRENCY:
+      return {
+        ...state,
+        defaultCurrency: action.payload,
       };
     default:
       return state;

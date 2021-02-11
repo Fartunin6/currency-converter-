@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import useTypedSelector from '../utils/typedSelector';
 
-import ConvertForm from '../components/ConvertForm';
-import { fetchRate, fetchSymbols } from '../redux/actions/convertActions';
+import ConvertForm from '../components/forms/ConvertForm';
+import { fetchRate, fetchSymbols, setDefaultCurrency } from '../redux/actions/convertActions';
+import { STORAGE_NAME } from '../constants';
 
 export type ConvertData = {
   amount: number;
@@ -14,19 +15,24 @@ export type ConvertData = {
 const MainPage: React.FC = () => {
   const dispatch = useDispatch();
 
-  const { symbols, rate } = useTypedSelector(({ convert }) => convert);
+  const { symbols, rate, defaultCurrency } = useTypedSelector(({ convert }) => convert);
 
   useEffect(() => {
     dispatch(fetchSymbols());
+
+    const currency = localStorage.getItem(STORAGE_NAME);
+    if (currency) {
+      dispatch(setDefaultCurrency(currency));
+    }
   }, [dispatch]);
 
-  const onSubmit = (convertData: ConvertData) => {
+  const onSubmit = (convertData: ConvertData): void => {
     dispatch(fetchRate(convertData));
   };
 
   return (
     <section className="convert">
-      <ConvertForm onSubmit={onSubmit} symbols={symbols} />
+      <ConvertForm onSubmit={onSubmit} symbols={symbols} defaultCurrency={defaultCurrency} />
       {rate && <span className="convert__rate">{rate}</span>}
     </section>
   );

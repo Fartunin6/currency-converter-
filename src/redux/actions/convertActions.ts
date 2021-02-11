@@ -11,6 +11,11 @@ export const setRate = (result: string): ConvertActions => ({
   payload: result,
 });
 
+export const setDefaultCurrency = (currency: string): ConvertActions => ({
+  type: CONVERT_NAMES.SET_DEFAULT_CURRENCY,
+  payload: currency,
+});
+
 export const fetchSymbols = (): ConvertActions => ({
   type: CONVERT_NAMES.FETCH_SYMBOLS,
 });
