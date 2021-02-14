@@ -14,7 +14,6 @@ export type ConvertData = {
 
 const MainPage: React.FC = () => {
   const dispatch = useDispatch();
-
   const { symbols, rate, defaultCurrency } = useTypedSelector(({ convert }) => convert);
 
   useEffect(() => {

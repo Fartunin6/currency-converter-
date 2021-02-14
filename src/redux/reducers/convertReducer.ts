@@ -1,4 +1,4 @@
-import { CONVERT_NAMES } from '../types/convertTypes';
+import { ConvertActions, CONVERT_NAMES } from '../types/convertTypes';
 
 const initialState = {
   symbols: {} as object,
@@ -8,7 +8,7 @@ const initialState = {
 
 type ConvertState = typeof initialState;
 
-const convertReducer = (state = initialState, action: any): ConvertState => {
+const convertReducer = (state = initialState, action: ConvertActions): ConvertState => {
   switch (action.type) {
     case CONVERT_NAMES.SET_SYMBOLS:
       return {
