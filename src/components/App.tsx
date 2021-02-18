@@ -12,7 +12,7 @@ const App: React.FC = () => {
       <Header />
       <Switch>
         <Route path="/" exact component={MainPage} />
-        <Route path="/exchange-rate" component={RatePage} />
+        <Route path="/exchange-rates" component={RatePage} />
 
         <Redirect to="/" />
       </Switch>

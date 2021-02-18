@@ -1,11 +1,11 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { STORAGE_NAME } from '../constants';
-import { setDefaultCurrency } from '../redux/actions/convertActions';
-import useTypedSelector from '../utils/typedSelector';
+import { DEFAULT_STORAGE } from '../../constants';
+import { setDefaultCurrency } from '../../redux/actions/convertActions';
+import useTypedSelector from '../../utils/typedSelector';
 
-import SelectForm from './forms/SelectForm';
-import Modal from './Modal';
+import DefaultForm from '../forms/DefaultForm';
+import Modal from '../Modal';
 
 type Props = {
   onClose: () => void;
@@ -20,14 +20,14 @@ const SelectModal: React.FC<Props> = ({ onClose }) => {
   const { symbols } = useTypedSelector(({ convert }) => ({ symbols: convert.symbols }));
 
   const onSubmit = ({ currency }: SelectData): void => {
-    localStorage.setItem(STORAGE_NAME, currency);
+    localStorage.setItem(DEFAULT_STORAGE, currency);
     dispatch(setDefaultCurrency(currency));
   };
 
   return (
     <Modal onClose={onClose}>
-      <span className="select__title">Choose your default currency</span>
-      <SelectForm onSubmit={onSubmit} symbols={symbols} />
+      <span className="modal__title">Choose your default currency</span>
+      <DefaultForm onSubmit={onSubmit} symbols={symbols} />
     </Modal>
   );
 };
