@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import useTypedSelector from '../utils/typedSelector';
 
 import ConvertForm from '../components/forms/ConvertForm';
-import { fetchRate, fetchSymbols, setDefaultCurrency } from '../redux/actions/convertActions';
+import { fetchRate, setDefaultCurrency } from '../redux/actions/convertActions';
 import { DEFAULT_STORAGE } from '../constants';
 
 export type ConvertData = {
@@ -17,8 +17,6 @@ const MainPage: React.FC = () => {
   const { symbols, rate, defaultCurrency } = useTypedSelector(({ convert }) => convert);
 
   useEffect(() => {
-    dispatch(fetchSymbols());
-
     const currency = localStorage.getItem(DEFAULT_STORAGE);
     if (currency) {
       dispatch(setDefaultCurrency(currency));

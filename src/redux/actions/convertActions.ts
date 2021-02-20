@@ -1,7 +1,7 @@
-import { CONVERT_NAMES, ConvertActions } from '../types/convertTypes';
+import { CONVERT_NAMES, ConvertActions, Symbols } from '../types/convertTypes';
 import { ConvertData } from '../../pages/MainPage';
 
-export const setSymbols = (symbols: object): ConvertActions => ({
+export const setSymbols = (symbols: Symbols): ConvertActions => ({
   type: CONVERT_NAMES.SET_SYMBOLS,
   payload: symbols,
 });

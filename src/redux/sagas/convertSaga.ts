@@ -1,20 +1,8 @@
 import { put, call, takeEvery, all, fork } from 'redux-saga/effects';
-import axios from 'axios';
-import ENDPOINTS from '../../constants/endpoints';
-
 import { CONVERT_NAMES, FetchRate } from '../types/convertTypes';
-import { ConvertData } from '../../pages/MainPage';
-
 import { setRate, setSymbols } from '../actions/convertActions';
 
-// these requests have to be in services folder
-const fetchSymbolsRequest = async (): Promise<object> => {
-  return await axios.get(ENDPOINTS.GET_SUPPORTED_SYMBOLS);
-};
-
-const fetchRateRequest = async (convertData: ConvertData): Promise<object> => {
-  return await axios.get(ENDPOINTS.GET_RATE(convertData));
-};
+import { fetchRateRequest, fetchSymbolsRequest } from '../../services';
 
 function* symbolsWorker() {
   const { data } = yield call(fetchSymbolsRequest);

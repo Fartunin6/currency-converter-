@@ -1,6 +1,7 @@
 import React from 'react';
 import { reduxForm, Field, InjectedFormProps } from 'redux-form';
 import { ConvertData } from '../../pages/MainPage';
+import { required } from '../../utils/validators';
 
 import FormOption from '../FormOption';
 
@@ -27,7 +28,13 @@ const ConvertForm: React.FC<Props & InjectedFormProps<ConvertData, Props>> = ({
       <div className="convert__form-container">
         <label className="convert__form-label">
           <span className="convert__form-name">amount</span>
-          <Field type="number" name="amount" component="input" className="convert__form-input" />
+          <Field
+            type="number"
+            name="amount"
+            validate={[required]}
+            component="input"
+            className="convert__form-input"
+          />
         </label>
         <label className="convert__form-label">
           <span className="convert__form-name">from</span>

@@ -11,7 +11,12 @@ type Props = {
 
 const RateList: React.FC<Props> = ({ rates, savedRates, addLabelToState }) => {
   const addLabel = (label: Label) => {
-    const storageArray = savedRates ? [...savedRates, label] : [label];
+    const storageArray = savedRates
+      ? savedRates.filter((el) => el.rateName === label.rateName).length > 0
+        ? savedRates
+        : [...savedRates, label]
+      : [label];
+
     localStorage.setItem(RATES_STORAGE, JSON.stringify(storageArray));
     addLabelToState(storageArray);
   };

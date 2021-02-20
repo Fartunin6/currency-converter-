@@ -10,9 +10,13 @@ export const CONVERT_NAMES = {
   SET_DEFAULT_CURRENCY: 'SET_DEFAULT_CURRENCY' as 'SET_DEFAULT_CURRENCY',
 };
 
+export type Symbols = {
+  [key: string]: string;
+};
+
 type SetSymbols = {
   type: typeof CONVERT_NAMES.SET_SYMBOLS;
-  payload: object;
+  payload: Symbols;
 };
 
 type SetRate = {

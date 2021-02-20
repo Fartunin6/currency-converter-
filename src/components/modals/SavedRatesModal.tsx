@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import useTypedSelector from '../../utils/typedSelector';
 
@@ -14,10 +14,15 @@ const SavedRatesModal: React.FC<Props> = ({ onClose }) => {
   const dispatch = useDispatch();
   const { savedRates } = useTypedSelector(({ rate }) => ({ savedRates: rate.savedRates }));
 
-  const deleteRate = (rateName: string) => {
+  useEffect(() => {
+    const savedStorageRates = localStorage.getItem(RATES_STORAGE);
+    dispatch(setSavedRates(savedStorageRates ? JSON.parse(savedStorageRates) : []));
+  }, [dispatch]);
+
+  const deleteRate = (rateName: string): void => {
     const storageArray = savedRates && savedRates.filter((label) => label.rateName !== rateName);
     localStorage.setItem(RATES_STORAGE, JSON.stringify(storageArray));
-    storageArray !== null && dispatch(setSavedRates(storageArray));
+    storageArray && dispatch(setSavedRates(storageArray));
   };
 
   return (
