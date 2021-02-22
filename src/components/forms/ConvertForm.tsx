@@ -1,12 +1,15 @@
 import React from 'react';
 import { reduxForm, Field, InjectedFormProps } from 'redux-form';
 import { ConvertData } from '../../pages/MainPage';
+import { Symbols } from '../../redux/types/convertTypes';
+
 import { required } from '../../utils/validators';
 
 import FormOption from '../FormOption';
+import RenderField from '../RenderField';
 
 type Props = {
-  symbols: object;
+  symbols: Symbols;
   defaultCurrency: string;
 };
 
@@ -28,13 +31,7 @@ const ConvertForm: React.FC<Props & InjectedFormProps<ConvertData, Props>> = ({
       <div className="convert__form-container">
         <label className="convert__form-label">
           <span className="convert__form-name">amount</span>
-          <Field
-            type="number"
-            name="amount"
-            validate={[required]}
-            component="input"
-            className="convert__form-input"
-          />
+          <Field type="number" name="amount" validate={[required]} component={RenderField} />
         </label>
         <label className="convert__form-label">
           <span className="convert__form-name">from</span>

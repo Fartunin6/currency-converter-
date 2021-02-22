@@ -1,7 +1,7 @@
-import { ConvertActions, CONVERT_NAMES } from '../types/convertTypes';
+import { ConvertActions, CONVERT_NAMES, Symbols } from '../types/convertTypes';
 
 const initialState = {
-  symbols: {} as object,
+  symbols: {} as Symbols,
   rate: null as string | null,
   defaultCurrency: '' as string,
 };
