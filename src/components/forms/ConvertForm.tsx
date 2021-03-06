@@ -57,4 +57,6 @@ const ConvertForm: React.FC<Props & InjectedFormProps<ConvertData, Props>> = ({
   );
 };
 
-export default reduxForm<ConvertData, Props>({ form: 'convert-form' })(ConvertForm);
+export default reduxForm<ConvertData, Props>({ form: 'convert-form', enableReinitialize: true })(
+  ConvertForm,
+);

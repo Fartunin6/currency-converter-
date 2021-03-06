@@ -24,12 +24,19 @@ const MainPage: React.FC = () => {
   }, [dispatch]);
 
   const onSubmit = (convertData: ConvertData): void => {
+    console.log(defaultCurrency);
+    console.log(convertData);
     dispatch(fetchRate(convertData));
   };
 
   return (
     <section className="convert">
-      <ConvertForm onSubmit={onSubmit} symbols={symbols} defaultCurrency={defaultCurrency} />
+      <ConvertForm
+        onSubmit={onSubmit}
+        initialValues={{ from: defaultCurrency, to: defaultCurrency }}
+        symbols={symbols}
+        defaultCurrency={defaultCurrency}
+      />
       {rate && <span className="convert__rate">{rate}</span>}
     </section>
   );

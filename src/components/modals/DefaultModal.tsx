@@ -27,7 +27,11 @@ const SelectModal: React.FC<Props> = ({ onClose }) => {
   return (
     <Modal onClose={onClose}>
       <span className="modal__title">Choose your default currency</span>
-      <DefaultForm onSubmit={onSubmit} symbols={symbols} />
+      <DefaultForm
+        onSubmit={onSubmit}
+        initialValues={{ currency: Object.keys(symbols)[0] }}
+        symbols={symbols}
+      />
     </Modal>
   );
 };

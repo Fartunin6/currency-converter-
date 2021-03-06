@@ -25,4 +25,6 @@ const SelectForm: React.FC<Props & InjectedFormProps<SelectData, Props>> = ({
   );
 };
 
-export default reduxForm<SelectData, Props>({ form: 'select-form' })(SelectForm);
+export default reduxForm<SelectData, Props>({ form: 'select-form', enableReinitialize: true })(
+  SelectForm,
+);

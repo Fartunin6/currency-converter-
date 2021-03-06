@@ -15,7 +15,7 @@ const RatePage: React.FC = () => {
     dispatch(fetchRates());
 
     const savedStorageRates = localStorage.getItem(RATES_STORAGE);
-    dispatch(setSavedRates(savedStorageRates !== null ? JSON.parse(savedStorageRates) : []));
+    dispatch(setSavedRates(savedStorageRates ? JSON.parse(savedStorageRates) : []));
   }, [dispatch]);
 
   const addLabelToState = (rates: Label[]) => {
